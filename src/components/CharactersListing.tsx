@@ -4,7 +4,7 @@ interface CharacterListingTypes {
   title: string;
   isLast?: boolean;
   characters: Character[];
-  setSelectedCharacter: (character: Character) => void;
+  setSelectedCharacter: (character: Character | null) => void;
 }
 
 export function CharacterListing({
@@ -16,7 +16,7 @@ export function CharacterListing({
   return (
     <div
       className={`w-full flex flex-col h-[60vh] justify-between p-4 ${
-        isLast ? "border-l" : ""
+        isLast ? "border-l border-black" : ""
       } `}
     >
       <h1

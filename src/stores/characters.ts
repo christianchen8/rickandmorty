@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 interface CharactersState {
+  info: any;
   characters: Character[];
   selectedCharacters: Character[];
   selectedFirstCharacter: Character | null;
@@ -8,13 +9,17 @@ interface CharactersState {
 }
 
 interface CharactersActions {
+  setInfo: (info: any) => void;
   setCharacters: (characters: Character[]) => void;
   setSelectedCharacters: (selectedCharacters: Character[]) => void;
-  setSelectedFirstCharacter: (selectedFirstCharacter: Character) => void;
-  setSelectedSecondCharacter: (selectedSecondCharacter: Character) => void;
+  setSelectedFirstCharacter: (selectedFirstCharacter: Character | null) => void;
+  setSelectedSecondCharacter: (
+    selectedSecondCharacter: Character | null
+  ) => void;
 }
 
 const initialState: CharactersState = {
+  info: null,
   characters: [],
   selectedCharacters: [],
   selectedFirstCharacter: null,
@@ -24,6 +29,7 @@ const initialState: CharactersState = {
 export const useCharacterStore = create<CharactersState & CharactersActions>(
   (set) => ({
     ...initialState,
+    setInfo: (info) => set({ info }),
     setCharacters: (characters) => set({ characters }),
     setSelectedCharacters: (selectedCharacters) => set({ selectedCharacters }),
     setSelectedFirstCharacter: (selectedFirstCharacter) =>

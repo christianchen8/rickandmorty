@@ -4,7 +4,7 @@ import { useCharacterStore } from "@/stores/characters";
 
 interface CharacterCardTypes {
   character: Character;
-  setSelectedCharacter: (character: Character) => void;
+  setSelectedCharacter: (character: Character | null) => void;
 }
 
 export function CharacterCard({
@@ -28,16 +28,23 @@ export function CharacterCard({
 
   return (
     <div
+      data-testid="container-card"
       className={`flex w-full border rounded-xl hover:shadow-lg cursor-pointer 
       ${selectedFirstCharacter === character ? "bg-blue-100" : ""}
       ${selectedSecondCharacter === character ? "bg-yellow-100" : ""}
       `}
-      onClick={() => setSelectedCharacter(character)}
+      onClick={() => {
+        selectedSecondCharacter === character ||
+        selectedFirstCharacter === character
+          ? setSelectedCharacter(null)
+          : setSelectedCharacter(character);
+      }}
     >
-      <div className="h-full min-w-[40%] relative  rounded-l-xl">
+      <div className="h-full min-w-[40%] relative rounded-l-xl">
         <Image
           fill
           src={image}
+          data-testid="character-image"
           alt="character-image"
           className="object-cover  rounded-l-xl"
         />

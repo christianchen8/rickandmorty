@@ -8,7 +8,6 @@ async function getData() {
     throw new Error("Failed to fetch data");
   }
   const data = await res.json();
-  console.log("dataaaaa ==>> ", data);
 
   return data;
 }
@@ -16,11 +15,9 @@ async function getData() {
 export default async function Home() {
   const data = await getData();
 
-  console.log("info", data.info);
-
   return (
     <main className="flex min-h-screen flex-col items-center bg-white overflow-hidden">
-      <MainList data={data.results} />
+      <MainList data={data} />
       <CompareSection />
     </main>
   );
